@@ -32,13 +32,10 @@ pipeline {
             junit 'results.xml'
         }
         success {
-            echo 'Build and tests completed successfully!'
+            echo '✅ Build and tests completed successfully!'
         }
         failure {
-            echo 'Build or tests failed. Check the test results for details.'
-        }
-        always {
-            junit 'results.xml'
+            echo '❌ Build or tests failed. Check the test results for details.'
         }
     }
 }
