@@ -10,26 +10,26 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("calculator-app")
-                }
+                sh 'docker build -t calculator-app .'
             }
         }
 
         stage('Run Tests') {
             steps {
-                script {
-                    docker.image("calculator-app").inside {
-                        sh 'pytest -v --junitxml=results.xml'
-                    }
-                }
+                sh 'docker run --rm calculator-app pytest -v --junitxml=results.xml'
             }
         }
     }
 
     post {
         always {
-            junit 'results.xml'
+            script {
+                if (fileExists('results.xml')) {
+                    junit 'results.xml'
+                } else {
+                    echo '⚠️ No test results found.'
+                }
+            }
         }
         success {
             echo '✅ Build and tests completed successfully!'
