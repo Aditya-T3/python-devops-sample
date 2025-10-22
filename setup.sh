@@ -52,7 +52,6 @@ sudo chmod -R 755 /var/lib/jenkins
 sudo systemctl daemon-reload
 sudo systemctl enable jenkins
 sudo systemctl start jenkins
-
 # -------------------------
 # 🧪 Install Python dependencies
 # -------------------------
@@ -62,7 +61,6 @@ if [ -f "requirements.txt" ]; then
 else
     echo "⚠️ requirements.txt not found, skipping Python dependency installation."
 fi
-
 # -------------------------
 # 🧰 Verify Jenkins port and restart if needed
 # -------------------------
@@ -80,13 +78,11 @@ else
         echo "   sudo journalctl -u jenkins -xe"
     fi
 fi
-
 # -------------------------
 # 🧪 Setup Python Path and Run Tests
 # -------------------------
 export PYTHONPATH=$PYTHONPATH:$(pwd)
 pytest -v
-
 # -------------------------
 # ✅ Final Info
 # -------------------------

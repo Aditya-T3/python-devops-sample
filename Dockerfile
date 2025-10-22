@@ -10,8 +10,8 @@ COPY . .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make setup.sh executable
-RUN chmod +x setup.sh
+# Set Python path
+ENV PYTHONPATH="${PYTHONPATH}:/app"
 
-# Run setup.sh when container starts
-CMD ["./setup.sh"]
+# Run tests when container starts
+CMD ["pytest", "-v"]
