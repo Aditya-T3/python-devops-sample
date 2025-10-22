@@ -16,7 +16,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'docker run --rm calculator-app pytest -v --junitxml=results.xml'
+                sh 'docker run --rm -v $PWD:/app calculator-app pytest -v --junitxml=/app/results.xml'
             }
         }
     }
@@ -39,3 +39,4 @@ pipeline {
         }
     }
 }
+
